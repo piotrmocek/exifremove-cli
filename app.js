@@ -61,7 +61,7 @@ images.forEach((imageFileInfo) => {
     });
 
     if (argv.verbose)
-        console.log("Writing EXIF-stripped image file to '" + imageFileInfo.destFileName + "'...");
+        console.log("Writing APP1(EXIF), APP10, APP11 -stripped image file to '" + imageFileInfo.destFileName + "'...");
 
     fs.writeFile(imageFileInfo.destFileName, result, (err) => {
         if (err) {
