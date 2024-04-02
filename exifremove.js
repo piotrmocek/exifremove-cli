@@ -34,11 +34,11 @@ var remove = function (imageBuffer, options) {
                 marker = 'APP1'
                 break;
             // APP10 Marker (which is typically designated for ActiveObject (multimedia messages / captions))
-            case "fffa":
+            case "ffea":
                 marker = 'APP10'
                 break;
             // APP11 Marker (which is typically designated for Photoshop AI data)
-            case "fffb":
+            case "ffeb":
                 marker = 'APP11'
                 break;
         }
