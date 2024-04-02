@@ -1,8 +1,6 @@
 # exifremove-cli
 
-[![npm](https://img.shields.io/npm/v/exifremove-cli)](https://www.npmjs.com/package/exifremove-cli)
-
-Command-line interface that utilizes [exifremove](https://github.com/Coteh/exifremove) to remove EXIF metdata from JPEG images.
+Command-line interface to remove EXIF (APP1), APP10 and APP11 metdata from JPEG images.
 
 ## Installation
 

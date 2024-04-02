@@ -14,3 +14,7 @@ Initial Release - Split from main module
 ## [1.0.2] - 2024.04.02
 
 Overwrite original jpg file on optimization
+
+## [1.0.3] - 2024.04.02
+
+Changed segment exclusion logic

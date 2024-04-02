@@ -1,12 +1,12 @@
 {
   "name": "exifremove-cli",
-  "version": "1.0.2",
-  "description": "CLI for a dependency-free Node.js module that removes EXIF and APP11 metadata from JPEG images",
+  "version": "1.0.3",
+  "description": "CLI for a dependency-free Node.js module that removes EXIF (APP1), APP10 and APP11 metadata from JPEG images",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Piotr Mocek, James Cote (Coteh)",
+  "author": "Piotr Mocek",
   "license": "MIT",
   "keywords": [
     "jpeg",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Coteh/exifremove.git",
+    "url": "https://github.com/piotrmocek/exifremove-cli.git",
     "directory": "cli"
   }
 }
