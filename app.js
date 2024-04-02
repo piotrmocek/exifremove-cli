@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
-const exifRemove = require("exifremove");
+const exifRemove = require("./exifremove");
 const argv = require("yargs")
     .usage("exifremove [image0] ... [imageN]")
     .count("verbose")
