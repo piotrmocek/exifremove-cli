@@ -1,0 +1,31 @@
+{
+  "name": "exifremove-cli",
+  "version": "1.0.1",
+  "description": "CLI for a dependency-free Node.js module that removes EXIF metadata from JPEG images",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James Cote (Coteh)",
+  "license": "MIT",
+  "keywords": [
+    "jpeg",
+    "jpg",
+    "exif",
+    "remove",
+    "remover",
+    "strip"
+  ],
+  "dependencies": {
+    "exifremove": "^1.0.1",
+    "yargs": "^16.0.0"
+  },
+  "bin": {
+    "exifremove": "./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coteh/exifremove.git",
+    "directory": "cli"
+  }
+}
