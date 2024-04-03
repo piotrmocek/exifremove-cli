@@ -1,12 +1,12 @@
-var remove = function (imageBuffer, options) {
+const remove = function (imageBuffer, options) {
 
     const excludeSegments = ['APP1', 'APP11', 'APP10'];
 
-    if (imageBuffer == undefined || imageBuffer.length < 2) {
+    if (imageBuffer === undefined || imageBuffer.length < 2) {
         return undefined;
     }
 
-    if (options == undefined) {
+    if (options === undefined) {
         options = {};
     }
 
@@ -18,13 +18,12 @@ var remove = function (imageBuffer, options) {
     }
 
     // Main portion which handles the logic for where to splice
-    var offsetPairs = [{start: 0, end: 2, id: 'SOI'}];
-    var lastRecordedByteIndex = 0;
+    let offsetPairs = [{start: 0, end: 2, id: 'SOI'}];
     for (var i = 2; i + 1 < imageBuffer.length; i++) {
         // Gather the hex representation of the two bytes found at this point in string format
         let bytePortion = imageBuffer[i].toString(16) + imageBuffer[i + 1].toString(16);
 
-        // There should be no EXIF metadata after the SOS marker
+        // There should be no metadata after the SOS marker
         if (bytePortion === "ffda") {
             break;
         }
@@ -35,11 +34,50 @@ var remove = function (imageBuffer, options) {
             case "ffc0":
                 marker = 'SOF0'
                 break;
+            case "ffc1":
+                marker = 'SOF1'
+                break;
             case "ffc2":
                 marker = 'SOF2'
                 break;
+            case "ffc3":
+                marker = 'SOF3'
+                break;
             case "ffc4":
                 marker = 'DHT'
+                break;
+            case "ffc5":
+                marker = 'SOF5'
+                break;
+            case "ffc6":
+                marker = 'SOF6'
+                break;
+            case "ffc7":
+                marker = 'SOF7'
+                break;
+            case "ffc8":
+                marker = 'JPG'
+                break;
+            case "ffc9":
+                marker = 'SOF9'
+                break;
+            case "ffca":
+                marker = 'SOF10'
+                break;
+            case "ffcb":
+                marker = 'SOF11'
+                break;
+            case "ffcc":
+                marker = 'DAC'
+                break;
+            case "ffcd":
+                marker = 'SOF13'
+                break;
+            case "ffce":
+                marker = 'SOF14'
+                break;
+            case "ffcf":
+                marker = 'SOF15'
                 break;
             case "ffdb":
                 marker = 'DQT'
@@ -104,7 +142,7 @@ var remove = function (imageBuffer, options) {
         }
 
         if (marker) {
-            // Grab offset size of the EXIF data which is found in following two bytes
+            // Grab offset size of the segment data which is found in following two bytes
             let offsetSize = marker === 'DRI' ? 4 : imageBuffer[i + 2] * 256 + imageBuffer[i + 3];
 
             if (options.verbose) {
@@ -117,19 +155,7 @@ var remove = function (imageBuffer, options) {
                 console.log("offset in decimal: " + offsetSize);
             }
 
-            // By default, the first slice will start from last recorded index (typically 0)
-            // and ends at the start of the APP1 section
-            let offsetEnd = i;
-            if (options.keepMarker && excludeSegments.includes(marker)) {
-                // Indicate that the size of the APP1 section is now just 2 bytes (these two)
-                imageBuffer[i + 2] = 0;
-                imageBuffer[i + 3] = 2;
-                // Offset end will now be at i + 4 to keep the marker and offset bytes
-                offsetEnd = i + 4;
-            }
-            else {
-                offsetEnd = i + offsetSize + 2
-            }
+            let offsetEnd = i + offsetSize + 2;
 
             // Push the start and end offsets to the offset pairs,
             // to indicate that we want a slice of the data from these ends
@@ -141,9 +167,6 @@ var remove = function (imageBuffer, options) {
 
             i = offsetEnd - 1;  // -1 to compensate increment on next loop
 
-            // Skip to the end of the APP1 segment
-            // lastRecordedByteIndex = i + offsetSize + 2;
-
             if (options.verbose)
                 console.log(
                     (
@@ -152,7 +175,6 @@ var remove = function (imageBuffer, options) {
                     ).toString(16),
                 );
 
-            // i = lastRecordedByteIndex;
             if (options.verbose) console.log("New i->" + i);
         }
     }
@@ -171,7 +193,7 @@ var remove = function (imageBuffer, options) {
 
     // This part here will slice the image buffer into pieces with the
     // size and offset of each piece defined by the offset pairs
-    var imageSlices = offsetPairs.map((pair) => {
+    const imageSlices = offsetPairs.map((pair) => {
         return excludeSegments.includes(pair.id) ? Buffer.from([]) : imageBuffer.slice(pair.start, pair.end);
     });
 
@@ -179,7 +201,7 @@ var remove = function (imageBuffer, options) {
 };
 
 module.exports.removeMultiple = function (imageBuffers, options) {
-    if (options == undefined) {
+    if (options === undefined) {
         options = {};
     }
 

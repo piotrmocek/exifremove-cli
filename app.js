@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
-const exifRemove = require("./exifremove");
+const metaRemove = require("./metaremove");
 const argv = require("yargs")
     .usage("exifremove [image0] ... [imageN]")
     .count("verbose")
@@ -55,7 +55,7 @@ images.forEach((imageFileInfo) => {
         console.log("Image file length: " + imageFile.length);
     }
 
-    var result = exifRemove.remove(imageFileInfo.buffer, {
+    var result = metaRemove.remove(imageFileInfo.buffer, {
         keepMarker: argv.keepMarker,
         verbose: argv.verbose,
     });

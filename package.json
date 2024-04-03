@@ -1,5 +1,5 @@
 {
-  "name": "exifremove-cli",
+  "name": "jpgclean-cli",
   "version": "1.0.3",
   "description": "CLI for a dependency-free Node.js module that removes EXIF (APP1), APP10 and APP11 metadata from JPEG images",
   "main": "app.js",
@@ -14,17 +14,18 @@
     "exif",
     "remove",
     "remover",
-    "strip"
+    "strip",
+    "meta"
   ],
   "dependencies": {
     "yargs": "^16.0.0"
   },
   "bin": {
-    "exifremove": "./app.js"
+    "jpgclean": "./app.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/piotrmocek/exifremove-cli.git",
+    "url": "https://github.com/piotrmocek/jpgclean-cli",
     "directory": "cli"
   }
 }
